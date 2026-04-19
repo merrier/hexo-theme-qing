@@ -317,27 +317,60 @@ a {
   letter-spacing: 1px;
 }
 
-/* Chinese Style Expand Button */
+/* Chinese Style Expand Button (故宫“更多”风格) */
 .zhui-expand-btn {
   background-color: transparent;
-  border: 1px solid #d4c8a8;
-  color: #8b7d6b;
+  color: #7d2524; /* 故宫红 */
   font-family: "Noto Serif SC", "Songti SC", serif;
-  font-size: 13px;
-  padding: 4px 12px;
-  border-radius: 20px;
+  font-size: 14px;
   cursor: pointer;
   transition: all 0.3s ease;
   letter-spacing: 1px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 5px;
+  border: none;
+  position: relative;
+  padding: 5px 15px;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background: url('https://img.dpm.org.cn/static/themes/image/public-icon3.png') no-repeat center center;
+    background-size: contain;
+    transition: left 0.3s ease;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background: url('https://img.dpm.org.cn/static/themes/image/public-icon4.png') no-repeat center center;
+    background-size: contain;
+    transition: right 0.3s ease;
+  }
+  
+  i {
+    display: none; /* 隐藏原有的箭头图标 */
+  }
   
   &:hover {
-    color: @theme_color;
-    border-color: @theme_color;
-    background-color: #fdfaf4;
+    color: #a93226;
+    &::before {
+      left: -15px;
+    }
+    &::after {
+      right: -15px;
+    }
   }
 }
 
