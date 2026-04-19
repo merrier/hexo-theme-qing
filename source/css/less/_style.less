@@ -317,6 +317,30 @@ a {
   letter-spacing: 1px;
 }
 
+/* Chinese Style Expand Button */
+.zhui-expand-btn {
+  background-color: transparent;
+  border: 1px solid #d4c8a8;
+  color: #8b7d6b;
+  font-family: "Noto Serif SC", "Songti SC", serif;
+  font-size: 13px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 1px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  
+  &:hover {
+    color: @theme_color;
+    border-color: @theme_color;
+    background-color: #fdfaf4;
+  }
+}
+
 input[type="search"] {
     box-sizing: border-box;
     width: 75%;
@@ -1153,6 +1177,11 @@ pre {
             margin: 0;
             list-style: none;
 
+            /* 展开折叠相关 */
+            &.is-collapsed .archive-list-item:nth-child(n+9) {
+                display: none;
+            }
+
             .archive-list-item {
                 flex: 0 0 auto;
                 width: calc(50% - 8px); /* 保持两列排版 */
@@ -1222,25 +1251,24 @@ pre {
             }
         }
         
-        /* 首页分类模块 - 古籍铭牌横向滚动样式 */
+        /* 首页分类模块 - 古籍铭牌横向滚动样式（已修改为不横向滚动，全部罗列） */
         .category-list {
             display: flex;
-            overflow-x: auto;
-            gap: 20px;
-            padding: 25px 15px;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 10px 5px;
             margin: 0;
             list-style: none;
-            /* 隐藏滚动条但保留滚动功能 */
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none; /* Firefox */
-            &::-webkit-scrollbar {
-                display: none; /* Chrome, Safari, Edge */
+
+            /* 展开折叠相关 */
+            &.is-collapsed .category-list-item:nth-child(n+7) {
+                display: none;
             }
 
             .category-list-item {
                 flex: 0 0 auto;
-                width: 150px; /* 增加宽度，适应横排文字 */
-                height: 54px; /* 减小高度，变为横向书签/铭牌样式 */
+                width: calc(50% - 8px); /* 两列排版 */
+                height: 45px; /* 减小高度 */
                 position: relative;
                 background-color: #f0ead6; /* 贴近老宣纸的底色 */
                 border: 1px solid #d4c8a8;
@@ -1253,7 +1281,7 @@ pre {
                 display: flex;
                 align-items: center;
                 justify-content: flex-start;
-                padding-left: 15px;
+                padding-left: 12px;
                 
                 /* 宣纸纤维纹理 */
                 background-image: 

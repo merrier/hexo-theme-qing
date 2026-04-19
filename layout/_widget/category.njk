@@ -1,6 +1,22 @@
 {% if site.categories.length %}
-    <div class="widget">
+    {% set limit = theme.cate_config.limit or 6 %}
+    <div class="widget category-widget">
         <h3 class="title">{{ __('categories') }}</h3>
-        {{ list_categories(getCategoriesArgs(theme)) | safe }}
+        
+        {% if site.categories.length > limit %}
+            {{ list_categories(getCategoriesArgs(theme)) | replace('class="category-list"', 'class="category-list is-collapsed"') | safe }}
+            <style>
+                .category-list.is-collapsed .category-list-item:nth-child(n+{{ limit + 1 }}) {
+                    display: none;
+                }
+            </style>
+            <div class="expand-btn-wrapper" style="text-align: center; margin-top: 15px;">
+                <button class="zhui-expand-btn" onclick="this.closest('.widget').querySelector('.category-list').classList.remove('is-collapsed'); this.parentElement.style.display='none';">
+                    <i class="fa fa-angle-double-down"></i> 展开全部
+                </button>
+            </div>
+        {% else %}
+            {{ list_categories(getCategoriesArgs(theme)) | safe }}
+        {% endif %}
     </div>
 {% endif %}

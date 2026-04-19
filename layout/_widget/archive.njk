@@ -1,6 +1,33 @@
 {% if site.posts.length %}
-    <div class="widget">
+    {% set limit = theme.arch_config.limit or 8 %}
+    <div class="widget archive-widget">
         <h3 class="title">{{ __('archives') }}</h3>
-        {{ list_archives(getArchivesArgs(theme)) | safe }}
+        
+        {{ list_archives(getArchivesArgs(theme)) | replace('class="archive-list"', 'class="archive-list is-collapsed"') | safe }}
+        
+        <style>
+            .archive-list.is-collapsed .archive-list-item:nth-child(n+{{ limit + 1 }}) {
+                display: none;
+            }
+        </style>
+        
+        <div class="expand-btn-wrapper" style="text-align: center; margin-top: 15px;">
+            <button id="archive-expand-btn" class="zhui-expand-btn" style="display: none;" onclick="this.closest('.widget').querySelector('.archive-list').classList.remove('is-collapsed'); this.parentElement.style.display='none';">
+                <i class="fa fa-angle-double-down"></i> 展开全部
+            </button>
+        </div>
+        
+        <script>
+            (function(){
+                var items = document.querySelectorAll('.archive-widget .archive-list-item');
+                if(items.length > {{ limit }}) {
+                    document.getElementById('archive-expand-btn').style.display = 'inline-block';
+                } else {
+                    // 如果数量没有超过限制，移除 is-collapsed 类，免得有什么副作用
+                    var list = document.querySelector('.archive-widget .archive-list');
+                    if(list) list.classList.remove('is-collapsed');
+                }
+            })();
+        </script>
     </div>
 {% endif %}
