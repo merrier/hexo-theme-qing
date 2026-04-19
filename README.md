@@ -98,6 +98,7 @@ carousel:
 # ==========================================
 widgets:
   - search        # Zhui 风格全站搜索
+  - he-calendar   # 中国风日历 (依赖 hexo-he-calendar 插件)
   - notification  # 网站公告
   - social        # 社交链接
   - category      # 分类列表
@@ -115,6 +116,13 @@ jsonContent:
     content: true
     categories: false
     tags: false
+
+## 中国风日历
+he_calendar:
+  route: 'he-calendar/' # 保持与 Hexo 根目录配置一致
+  width: '100%'
+  height: '420px'
+  border_radius: '2px'
 
 ## 网站公告设置 (支持 HTML)
 notification: |-
