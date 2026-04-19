@@ -1,0 +1,34 @@
+{% if theme.jsonContent.searchLocal or  theme.jsonContent.searchGoogle %}
+    <div class="widget">
+        <h3 class="title">{{ __('search') }}</h3>
+        <div id="search-form">
+            <div id="result-mask" class="hide"></div>
+            <div class="search-area">
+                {% if theme.jsonContent.searchLocal %}
+                    <div class="zhui-input-wrapper zhui-input-wrapper-medium" style="width: 100%;">
+                        <span class="zhui-input-icon-wrapper">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </span>
+                        <input id="search-key" class="zhui-input zhui-input-meihong" type="search" autocomplete="off" placeholder="{{ __('search_placeholder') }}">
+                    </div>
+                {% endif %}
+                {% if theme.jsonContent.searchGoogle %}
+                    {{ search_form({'button':'谷歌搜索','text':'Google Search'}) | safe }}
+                {% endif %}
+            </div>
+            <div id="result-wrap" class="hide">
+                <div id="search-result"></div>
+            </div>
+            <div class="hide">
+                <template id="search-tpl">
+                    <div class="item">
+                        <a href="/{path}" title="{title}">
+                            <div class="title">{title}</div>
+                            <div class="content">{content}</div>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+{% endif %}
