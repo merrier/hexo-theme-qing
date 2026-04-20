@@ -3,16 +3,16 @@
     <div class="content" style="padding: 0; background: transparent; box-shadow: none; overflow: visible;">
         {% set he_route = theme.he_calendar.route or 'he-calendar/' %}
         {% set he_width = theme.he_calendar.width or '100%' %}
-        {% set he_height = theme.he_calendar.height or '110px' %}
+        {% set he_height = theme.he_calendar.height or '130px' %}
         {% set he_view = theme.he_calendar.view or 'week' %}
-        {% set he_theme = theme.he_calendar.theme or 'red' %}
+        {% set he_theme = theme.he_calendar.defaultTheme or 'red' %}
         {% set he_hideHeader = theme.he_calendar.hideHeader %}
         {% if he_hideHeader == undefined %}{% set he_hideHeader = true %}{% endif %}
         {% set he_radius = theme.he_calendar.border_radius or '2px' %}
         
         <div class="he-calendar-wrapper" style="width: {{ he_width }}; height: {{ he_height }}; overflow: hidden; border-radius: {{ he_radius }}; margin: 0 auto; min-width: 280px; position: relative;">
             <!-- 如果你的根目录配置了 he_calendar 改变了路由，这里请确保一致 -->
-            <iframe src="{{ url_for(he_route + 'index.html?view=' + he_view + '&theme=' + he_theme + '&hideHeader=' + he_hideHeader) }}" style="width: 100%; height: 100%; border: none; border-radius: {{ he_radius }}; background: transparent; display: block;" frameborder="0" scrolling="no"></iframe>
+            <iframe src="{{ url_for(he_route + 'index.html?view=' + he_view + '&defaultTheme=' + he_theme + '&hideHeader=' + he_hideHeader) }}" style="width: 100%; height: 100%; border: none; border-radius: {{ he_radius }}; background: transparent; display: block;" frameborder="0" scrolling="no"></iframe>
         </div>
     </div>
 </div>

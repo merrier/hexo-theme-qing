@@ -67,9 +67,9 @@ jsonContent:
 he_calendar:
   route: 'he-calendar/' # 保持与 Hexo 根目录配置一致
   width: '100%'
-  height: '110px'
+  height: '130px'
   view: 'week'
-  theme: 'red'
+  defaultTheme: 'red'
   hideHeader: true
   border_radius: '2px'
 

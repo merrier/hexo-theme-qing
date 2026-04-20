@@ -121,8 +121,10 @@ jsonContent:
 he_calendar:
   route: 'he-calendar/' # 保持与 Hexo 根目录配置一致
   width: '100%'
-  height: '180px'
+  height: '130px'
   view: 'week'
+  defaultTheme: 'red'
+  hideHeader: true
   border_radius: '2px'
 
 ## 网站公告设置 (支持 HTML)
