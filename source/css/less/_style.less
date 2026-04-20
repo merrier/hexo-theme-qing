@@ -1553,20 +1553,46 @@ pre {
         }
     }
     .social a {
-        display: inline-block;
-        text-align: center;
-        width: 40px;
-        height: 40px;
-        line-height: 45px;
-        color: @white_color;
-        background: @grey8_color;
-        .border-radius(3px);
-        margin-right: 10px;
-        margin-bottom: 10px;
-        &:hover {
-            background: @theme_color;
-            .transition;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 42px;
+        height: 42px;
+        color: #a93226; /* 印泥朱砂红 */
+        background: transparent;
+        border: 2px solid #a93226;
+        border-radius: 4px;
+        margin-right: 12px;
+        margin-bottom: 12px;
+        position: relative;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        
+        /* 增加印章内框线效果 */
+        &::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            right: 2px;
+            bottom: 2px;
+            border: 1px solid rgba(169, 50, 38, 0.5);
+            border-radius: 2px;
+            pointer-events: none;
+            transition: all 0.3s ease;
         }
+
+        &:hover {
+            background: #a93226;
+            color: #fdfaf4;
+            transform: scale(1.08) rotate(-5deg); /* 轻微放大和旋转，模拟印章盖下的动作 */
+            box-shadow: 2px 4px 8px rgba(169, 50, 38, 0.3);
+            
+            &::after {
+                border-color: rgba(253, 250, 244, 0.5);
+            }
+        }
+        
         &:last-child{
            margin-right: 0px;
         }
