@@ -1,4 +1,4 @@
-{% set bg_style = "background-image: url('https://loremflickr.com/1920/400/china,landscape,painting/all?random=" + (range(1, 1000000) | random) + "'); background-size: cover; background-position: center; background-repeat: no-repeat;" %}
+{% set bg_style = "background-image: url('https://api.dujin.org/pic/shanshui/'); background-size: cover; background-position: center; background-repeat: no-repeat;" %}
 {% if theme.header_bg and theme.header_bg != 'random' %}
     {% if theme.header_bg.startsWith('#') or theme.header_bg.startsWith('rgb') or theme.header_bg.startsWith('rgba') %}
         {% set bg_style = "background-color: " + theme.header_bg + ";" %}
