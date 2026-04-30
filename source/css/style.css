@@ -324,6 +324,50 @@ a img {
   font-weight: 500;
   letter-spacing: 1px;
 }
+/* Chinese Style Expand Button (故宫“更多”风格) */
+.zhui-expand-btn {
+  background-color: transparent;
+  color: #474747;
+  font-family: "Noto Serif SC", "Songti SC", serif;
+  font-size: 12px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  position: relative;
+  height: 40px;
+  line-height: 40px;
+  width: 144px;
+  margin: 0 auto;
+  padding: 0;
+  transition: color 0.3s ease;
+}
+.zhui-expand-btn .zhui-expand-svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.zhui-expand-btn .zhui-expand-svg path {
+  stroke-dasharray: 1000, 1000;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.5s ease, stroke-dasharray 0.5s ease, stroke 0.3s ease;
+}
+.zhui-expand-btn span {
+  position: relative;
+  z-index: 1;
+}
+.zhui-expand-btn:hover {
+  color: #c0392b;
+}
+.zhui-expand-btn:hover .zhui-expand-svg path {
+  stroke-dasharray: 500, 500;
+  stroke-dashoffset: -1000;
+}
 input[type="search"] {
   box-sizing: border-box;
   width: 75%;
@@ -442,10 +486,54 @@ pre {
   z-index: 99;
 }
 .carousel {
-  margin-bottom: 20px;
+  position: relative;
+  margin: 30px 15px 40px;
+  padding: 10px 20px;
+  background-color: #fdfaf4;
+  /* Rice paper background */
+  border-top: 1px solid #c8a885;
+  /* Muted Silk border */
+  border-bottom: 1px solid #c8a885;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  /* Left scroll rod */
+  /* Right scroll rod */
+}
+.carousel::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: -8px;
+  width: 16px;
+  height: calc(100% + 12px);
+  background: linear-gradient(to right, #8a6f51 0%, #b89a7a 30%, #9c7f60 70%, #685038 100%);
+  border-radius: 8px;
+  box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.15);
+  z-index: 2;
+}
+.carousel::after {
+  content: '';
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  width: 16px;
+  height: calc(100% + 12px);
+  background: linear-gradient(to left, #8a6f51 0%, #b89a7a 30%, #9c7f60 70%, #685038 100%);
+  border-radius: 8px;
+  box-shadow: -2px 3px 6px rgba(0, 0, 0, 0.15);
+  z-index: 2;
+}
+.carousel a {
+  display: block;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 .carousel img {
   width: 100%;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.carousel img:hover {
+  transform: scale(1.03);
 }
 /*====================================================
     header
@@ -1146,7 +1234,18 @@ pre {
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
   /* 归档列表 - 中国风竹简/书签样式 */
-  /* 首页分类模块 - 古籍铭牌横向滚动样式 */
+  /* 首页分类模块 - 古籍铭牌横向滚动样式（已修改为不横向滚动，全部罗列） */
+}
+.sidebar .widget.he-calendar-widget {
+  padding: 16px 0;
+  overflow: visible;
+  background: #fbfbf9;
+  border: 1px solid #dcd6cb;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+.sidebar .widget.he-calendar-widget .title {
+  margin-left: 25px;
+  margin-right: 25px;
 }
 .sidebar .widget ul {
   padding: 0;
@@ -1161,6 +1260,10 @@ pre {
   padding: 10px 5px;
   margin: 0;
   list-style: none;
+  /* 展开折叠相关 */
+}
+.sidebar .widget .archive-list.is-collapsed .archive-list-item:nth-child(n+9) {
+  display: none;
 }
 .sidebar .widget .archive-list .archive-list-item {
   flex: 0 0 auto;
@@ -1233,26 +1336,22 @@ pre {
 }
 .sidebar .widget .category-list {
   display: flex;
-  overflow-x: auto;
-  gap: 20px;
-  padding: 25px 15px;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 10px 5px;
   margin: 0;
   list-style: none;
-  /* 隐藏滚动条但保留滚动功能 */
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  /* Firefox */
+  /* 展开折叠相关 */
 }
-.sidebar .widget .category-list::-webkit-scrollbar {
+.sidebar .widget .category-list.is-collapsed .category-list-item:nth-child(n+7) {
   display: none;
-  /* Chrome, Safari, Edge */
 }
 .sidebar .widget .category-list .category-list-item {
   flex: 0 0 auto;
-  width: 150px;
-  /* 增加宽度，适应横排文字 */
-  height: 54px;
-  /* 减小高度，变为横向书签/铭牌样式 */
+  width: calc(50% - 8px);
+  /* 两列排版 */
+  height: 45px;
+  /* 减小高度 */
   position: relative;
   background-color: #f0ead6;
   /* 贴近老宣纸的底色 */
@@ -1265,7 +1364,7 @@ pre {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding-left: 15px;
+  padding-left: 12px;
   /* 宣纸纤维纹理 */
   background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.04) 0%, transparent 5%, transparent 95%, rgba(0, 0, 0, 0.02) 100%), linear-gradient(180deg, rgba(187, 163, 113, 0.1) 1px, transparent 1px);
   background-size: 100% 100%, 100% 3px;
@@ -1480,23 +1579,44 @@ pre {
   text-decoration: none;
 }
 .widget .social a {
-  display: inline-block;
-  text-align: center;
-  width: 40px;
-  height: 40px;
-  line-height: 45px;
-  color: #fbfbf9;
-  background: #7d7870;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-  margin-right: 10px;
-  margin-bottom: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  color: #a93226;
+  /* 印泥朱砂红 */
+  background: transparent;
+  border: 2px solid #a93226;
+  border-radius: 4px;
+  margin-right: 12px;
+  margin-bottom: 12px;
+  position: relative;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  /* 增加印章内框线效果 */
+}
+.widget .social a::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  border: 1px solid rgba(169, 50, 38, 0.5);
+  border-radius: 2px;
+  pointer-events: none;
+  transition: all 0.3s ease;
 }
 .widget .social a:hover {
-  background: #c0392b;
-  -webkit-transition: all 0.2s;
-  transition: all 0.2s;
+  background: #a93226;
+  color: #fdfaf4;
+  transform: scale(1.08) rotate(-5deg);
+  /* 轻微放大和旋转，模拟印章盖下的动作 */
+  box-shadow: 2px 4px 8px rgba(169, 50, 38, 0.3);
+}
+.widget .social a:hover::after {
+  border-color: rgba(253, 250, 244, 0.5);
 }
 .widget .social a:last-child {
   margin-right: 0px;
@@ -2330,4 +2450,65 @@ pre .javascript .function {
     content: "";
     margin-bottom: 10px;
   }
+}
+/* medium-zoom overlay - Light Mode (Modern Minimalist + Chinese style) */
+.medium-zoom-overlay {
+  background: rgba(245, 241, 233, 0.85) !important;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 999;
+}
+.medium-zoom-image--opened {
+  z-index: 1000;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+html.dark-mode {
+  filter: invert(1) hue-rotate(180deg);
+  background-color: #fff;
+}
+html.dark-mode img,
+html.dark-mode video,
+html.dark-mode iframe,
+html.dark-mode .fa,
+html.dark-mode .navbar-brand,
+html.dark-mode .branding,
+html.dark-mode .footer,
+html.dark-mode .header-avatar {
+  filter: invert(1) hue-rotate(180deg);
+}
+.theme-dropdown li a.theme-option.active {
+  color: #c0392b;
+  font-weight: bold;
+}
+html.dark-mode .theme-dropdown {
+  background-color: #222 !important;
+}
+html.dark-mode .theme-dropdown li a {
+  color: #eee !important;
+}
+html.dark-mode .theme-dropdown li a:hover {
+  color: #c0392b !important;
+}
+html.dark-mode .carousel {
+  background-color: #2c2825 !important;
+  border-top-color: #4a3825 !important;
+  border-bottom-color: #4a3825 !important;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5) !important;
+}
+html.dark-mode .carousel::before {
+  background: linear-gradient(to right, #3a2a1a 0%, #5c432d 30%, #4a3624 70%, #2a1e14 100%) !important;
+}
+html.dark-mode .carousel::after {
+  background: linear-gradient(to left, #3a2a1a 0%, #5c432d 30%, #4a3624 70%, #2a1e14 100%) !important;
+}
+html.dark-mode .carousel a {
+  border-color: rgba(255, 255, 255, 0.05) !important;
+}
+/* medium-zoom overlay - Dark Mode */
+html.dark-mode .medium-zoom-overlay {
+  background: rgba(30, 30, 30, 0.85) !important;
+}
+html.dark-mode .medium-zoom-image--opened {
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.05);
 }

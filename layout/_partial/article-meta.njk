@@ -7,7 +7,7 @@
     {% set _categoryInfo = _data.name if _data else " " %}
     <span class="categories-meta fa-wrap zhui-category-wrapper">
         <i class="fa fa-book"></i>
-        <a href="/categories/{{ _categoryInfo }}">
+        <a href="{{ url_for(_data.path) }}">
             【 {{ _categoryInfo }} 】
         </a>
     </span>
@@ -19,7 +19,7 @@
             {% if post.tags and post.tags.length > 0 %}
                 {% set limit = 3 if post.tags.length > 3 else post.tags.length %}
                 {% for i in range(0, limit) %}
-                    <a href="/tags/{{ post.tags.data[i].name }}" title='{{ post.tags.data[i].name }}' class="zhui-tag-wrapper">
+                    <a href="{{ url_for(post.tags.data[i].path) }}" title='{{ post.tags.data[i].name }}' class="zhui-tag-wrapper">
                         <div class="zhui-tag-body">{{ post.tags.data[i].name }}</div>
                     </a>
                 {% endfor %}

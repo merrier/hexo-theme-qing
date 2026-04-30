@@ -466,9 +466,55 @@ pre {
     z-index: 99;
 }
 .carousel {
-    margin-bottom: 20px;
+    position: relative;
+    margin: 30px 15px 40px;
+    padding: 10px 20px;
+    background-color: #fdfaf4; /* Rice paper background */
+    border-top: 1px solid #c8a885; /* Muted Silk border */
+    border-bottom: 1px solid #c8a885;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    
+    /* Left scroll rod */
+    &::before {
+        content: '';
+        position: absolute;
+        top: -6px;
+        left: -8px;
+        width: 16px;
+        height: ~"calc(100% + 12px)";
+        background: linear-gradient(to right, #8a6f51 0%, #b89a7a 30%, #9c7f60 70%, #685038 100%);
+        border-radius: 8px;
+        box-shadow: 2px 3px 6px rgba(0,0,0,0.15);
+        z-index: 2;
+    }
+
+    /* Right scroll rod */
+    &::after {
+        content: '';
+        position: absolute;
+        top: -6px;
+        right: -8px;
+        width: 16px;
+        height: ~"calc(100% + 12px)";
+        background: linear-gradient(to left, #8a6f51 0%, #b89a7a 30%, #9c7f60 70%, #685038 100%);
+        border-radius: 8px;
+        box-shadow: -2px 3px 6px rgba(0,0,0,0.15);
+        z-index: 2;
+    }
+
+    a {
+        display: block;
+        overflow: hidden;
+        border: 1px solid rgba(0,0,0,0.05);
+    }
+
     img {
         width: 100%;
+        display: block;
+        transition: transform 0.5s ease;
+        &:hover {
+            transform: scale(1.03);
+        }
     }
 }
 
@@ -1983,3 +2029,19 @@ pre {
         }
     }
 }
+
+/* medium-zoom overlay - Light Mode (Modern Minimalist + Chinese style) */
+.medium-zoom-overlay {
+    background: rgba(245, 241, 233, 0.85) !important;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 999;
+}
+
+.medium-zoom-image--opened {
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+@import "_dark-mode.less";
